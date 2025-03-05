@@ -1,10 +1,11 @@
 package com.rensystem.p02_quizapp.Activity
 
+import android.content.Intent
 import android.os.Bundle
 import com.rensystem.p02_quizapp.R
 import com.rensystem.p02_quizapp.databinding.ActivityMainBinding
 
-class MainActivity : BaseActivity(){
+class MainActivity : BaseActivity() {
 
     lateinit var binding: ActivityMainBinding
 
@@ -21,8 +22,8 @@ class MainActivity : BaseActivity(){
 
             bottomMenu.setItemSelected(R.id.home)
             bottomMenu.setOnItemSelectedListener {
-                if(it== R.id.board){
-
+                if (it == R.id.board) {
+                    startActivity(Intent(this@MainActivity, LeaderActivity::class.java))
                 }
             }
 
