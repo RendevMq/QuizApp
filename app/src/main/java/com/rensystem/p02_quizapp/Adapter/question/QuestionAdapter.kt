@@ -18,6 +18,70 @@ class QuestionAdapter(
     var correctAnswer: String = "",
     val answersQuestion: MutableList<String> = mutableListOf(),
     var returnScore: score
+) : RecyclerView.Adapter<QuestionViewHolder>() {
+
+    interface score {
+        fun amount(number: Int, clickedAnswer: String)
+    }
+
+    private lateinit var binding: ItemViewholderQuestionBinding
+
+    private val differCallback = object : DiffUtil.ItemCallback<String>() {
+
+        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    val differ = AsyncListDiffer(this, differCallback)
+
+    override fun getItemCount() = differ.currentList.size
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        binding = ItemViewholderQuestionBinding.inflate(inflater, parent, false)
+        return QuestionViewHolder(binding,updateAnswer)
+    }
+
+//    private val updateAnswer: (String) -> Unit = { str->
+//        differ.currentList.add(index=4,str)
+//        notifyDataSetChanged()
+//    }
+
+    // Callback que ahora recibe 'answersQuestion' y la respuesta 'str',
+    // y notifica específicamente los ítems cambiados usando notifyItemChanged
+    private val updateAnswer: (String, Int, Int) -> Unit = { str, position, currentPos ->
+        val updatedAnswers = differ.currentList.toMutableList() // Copia la lista actual
+        updatedAnswers.add(str) // Agrega la respuesta
+
+        Log.i("RenatoID BEFORE UPDATE", "Size = ${answersQuestion.size}") // <-- Log antes del cambio
+
+        differ.submitList(updatedAnswers) {
+            // Este callback se ejecuta cuando `submitList` termina
+            Log.i("RenatoID AFTER UPDATE", "Size = ${updatedAnswers.size}") // <-- Ahora debe ser 5
+            notifyDataSetChanged()
+        }
+    }
+    //El problema era que submitList() no actualiza la lista inmediatamente, sino que lo hace en un proceso asíncrono. Usando el callback de submitList(), puedes asegurarte de que la actualización ya ocurrió antes de que se renderice la vista.
+
+
+    override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
+
+        holder.bind(position, correctAnswer, differ.currentList, returnScore)
+    }
+}
+
+
+//CODIGO EN UN SOLO ARCHIVO
+/*
+class QuestionAdapter(
+    var correctAnswer: String = "",
+    val answersQuestion: MutableList<String> = mutableListOf(),
+    var returnScore: score
 ) : RecyclerView.Adapter<QuestionAdapter.Viewholder>() {
 
     interface score {
@@ -58,6 +122,8 @@ class QuestionAdapter(
         val currentPos = getAnswerPosition(correctAnswer)
 
         if (differ.currentList.size == 5 && currentPos == position) {
+            Log.i("RenatoID SIZE 5 VERDE" , "FUTBOL : POSITION: $position , CURRENTPOSITION $currentPos")
+
             binding.tvAnswer.setBackgroundResource(R.drawable.green_bg)
             val drawable = ContextCompat.getDrawable(binding.root.context, R.drawable.tick)
             binding.tvAnswer.setCompoundDrawablesRelativeWithIntrinsicBounds(
@@ -91,6 +157,10 @@ class QuestionAdapter(
             var clickedPos = getAnswerPosition(differ.currentList[4])
 
             if (clickedPos == position && clickedPos != currentPos) {
+
+                Log.i("RenatoID SIZE 5 ROJO" , "FUTBOL : POSITION: $position , CURRENTPOSITION $currentPos")
+
+
                 binding.tvAnswer.setBackgroundResource(R.drawable.red_bg)
                 val drawable = ContextCompat.getDrawable(binding.root.context, R.drawable.thieves)
                 binding.tvAnswer.setCompoundDrawablesRelativeWithIntrinsicBounds(
@@ -162,4 +232,6 @@ class QuestionAdapter(
             else -> ""  // Este else nunca debería ocurrir si position está entre 0 y 3
         }
     }
-}
+}*/
+
+
