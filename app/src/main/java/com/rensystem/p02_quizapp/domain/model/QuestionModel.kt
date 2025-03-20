@@ -1,20 +1,21 @@
-package com.rensystem.p02_quizapp.Domain
+package com.rensystem.p02_quizapp.domain.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.rensystem.p02_quizapp.data.model.QuestionDataModel
 
 data class QuestionModel(
-    val id:Int,
-    val question:String?,
-    val answer_1:String?,
-    val answer_2:String?,
-    val answer_3:String?,
-    val answer_4:String?,
-    val correctAnswer:String?,
-    val score:Int,
-    val picPath:Int?,
-    var clickedAnswer:String?
-) : Parcelable{
+    val id: Int,
+    val question: String?,
+    val answer_1: String?,
+    val answer_2: String?,
+    val answer_3: String?,
+    val answer_4: String?,
+    val correctAnswer: String?,
+    val score: Int,
+    val picPath: Int?,
+    var clickedAnswer: String?
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString(),
@@ -37,7 +38,7 @@ data class QuestionModel(
         parcel.writeString(answer_4)
         parcel.writeString(correctAnswer)
         parcel.writeInt(score)
-        parcel.writeInt(picPath?: 0)
+        parcel.writeInt(picPath ?: 0)
         parcel.writeString(clickedAnswer)
     }
 
@@ -55,3 +56,17 @@ data class QuestionModel(
         }
     }
 }
+
+fun QuestionDataModel.toDomain() =
+    QuestionModel(
+        id,
+        question,
+        answer_1,
+        answer_2,
+        answer_3,
+        answer_4,
+        correctAnswer,
+        score,
+        picPath,
+        clickedAnswer
+    )

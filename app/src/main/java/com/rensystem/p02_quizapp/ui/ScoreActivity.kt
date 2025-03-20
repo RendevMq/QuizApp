@@ -1,15 +1,11 @@
-package com.rensystem.p02_quizapp.Activity
+package com.rensystem.p02_quizapp.ui
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.rensystem.p02_quizapp.R
 import com.rensystem.p02_quizapp.databinding.ActivityScoreBinding
-import com.rensystem.p02_quizapp.databinding.ItemViewholderQuestionBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ScoreActivity : BaseActivity() {
 
     var score:Int = 0

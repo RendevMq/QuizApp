@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_bg_color"
-    tools:context=".Activity.QuestionActivity">
+    tools:context=".ui.question.QuestionActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -86,10 +86,11 @@
                 android:layout_marginTop="16sp"
                 android:indeterminateDuration="10"
                 android:max="10"
-                android:progress="5"
+                android:progress="1"
                 app:indicatorColor="@color/blue"
                 app:trackCornerRadius="50dp"
-                app:trackThickness="14dp" />
+                app:trackThickness="14dp"
+                />
 
             <TextView
                 android:id="@+id/tvQuestion"
