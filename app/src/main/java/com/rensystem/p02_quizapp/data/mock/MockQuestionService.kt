@@ -1,45 +1,14 @@
-package com.rensystem.p02_quizapp.Activity
+package com.rensystem.p02_quizapp.data.mock
 
-import android.content.Intent
-import android.os.Bundle
-import com.rensystem.p02_quizapp.Domain.QuestionModel
 import com.rensystem.p02_quizapp.R
-import com.rensystem.p02_quizapp.databinding.ActivityMainBinding
-
-class MainActivity : BaseActivity() {
-
-    lateinit var binding: ActivityMainBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.apply {
-            btnSingle.setOnClickListener {
-                val intent = Intent(this@MainActivity, QuestionActivity::class.java)
-                intent.putParcelableArrayListExtra("list", ArrayList(questionList()))
-                startActivity(intent)
-            }
-
-            bottomMenu.setItemSelected(R.id.home)
-            bottomMenu.setOnItemSelectedListener {
-                if (it == R.id.board) {
-                    startActivity(Intent(this@MainActivity, LeaderActivity::class.java))
-                }
-            }
-
-        }
+import com.rensystem.p02_quizapp.data.model.QuestionDataModel
+import javax.inject.Inject
 
 
-    }
-
-    private fun questionList(): MutableList<QuestionModel> {
-        val question: MutableList<QuestionModel> = mutableListOf()
-
-        question.add(
-            QuestionModel(
+class MockQuestionService @Inject constructor() {
+    suspend fun getQuestionList(): List<QuestionDataModel> {
+        return listOf(
+            QuestionDataModel(
                 id = 1,
                 question = "Which planet is the largest planet in the solar system?",
                 answer_1 = "Earth",
@@ -50,11 +19,8 @@ class MainActivity : BaseActivity() {
                 score = 5,
                 picPath = R.drawable.q_1,
                 clickedAnswer = null
-            )
-        )
-
-        question.add(
-            QuestionModel(
+            ),
+            QuestionDataModel(
                 id = 2,
                 question = "Which country is the largest country in the world by land area?",
                 answer_1 = "Russia",
@@ -65,11 +31,8 @@ class MainActivity : BaseActivity() {
                 score = 5,
                 picPath = R.drawable.q_2,
                 clickedAnswer = null
-            )
-        )
-
-        question.add(
-            QuestionModel(
+            ),
+            QuestionDataModel(
                 id = 3,
                 question = "Which of the following substances is used as an anti-cancer medication in the medical world?",
                 answer_1 = "Cheese",
@@ -80,11 +43,8 @@ class MainActivity : BaseActivity() {
                 score = 5,
                 picPath = R.drawable.q_3,
                 clickedAnswer = null
-            )
-        )
-
-        question.add(
-            QuestionModel(
+            ),
+            QuestionDataModel(
                 id = 4,
                 question = "Which moon in the Earth's solar system has an atmosphere?",
                 answer_1 = "Luna (Moon)",
@@ -95,11 +55,8 @@ class MainActivity : BaseActivity() {
                 score = 5,
                 picPath = R.drawable.q_4,
                 clickedAnswer = null
-            )
-        )
-
-        question.add(
-            QuestionModel(
+            ),
+            QuestionDataModel(
                 id = 5,
                 question = "Which of the following symbols represents the chemical element with the atomic number 6?",
                 answer_1 = "O",
@@ -110,11 +67,8 @@ class MainActivity : BaseActivity() {
                 score = 5,
                 picPath = R.drawable.q_5,
                 clickedAnswer = null
-            )
-        )
-
-        question.add(
-            QuestionModel(
+            ),
+            QuestionDataModel(
                 id = 6,
                 question = "Who is credited with inventing theater as we know it today?",
                 answer_1 = "Shakespeare",
@@ -125,11 +79,8 @@ class MainActivity : BaseActivity() {
                 score = 5,
                 picPath = R.drawable.q_6,
                 clickedAnswer = null
-            )
-        )
-
-        question.add(
-            QuestionModel(
+            ),
+            QuestionDataModel(
                 id = 7,
                 question = "Which ocean is the largest ocean in the world?",
                 answer_1 = "Pacific Ocean",
@@ -140,11 +91,8 @@ class MainActivity : BaseActivity() {
                 score = 5,
                 picPath = R.drawable.q_7,
                 clickedAnswer = null
-            )
-        )
-
-        question.add(
-            QuestionModel(
+            ),
+            QuestionDataModel(
                 id = 8,
                 question = "Which religions are among the most practiced religions in the world?",
                 answer_1 = "Islam, Christianity, Judaism",
@@ -155,11 +103,8 @@ class MainActivity : BaseActivity() {
                 score = 5,
                 picPath = R.drawable.q_8,
                 clickedAnswer = null
-            )
-        )
-
-        question.add(
-            QuestionModel(
+            ),
+            QuestionDataModel(
                 id = 9,
                 question = "In which continent are the most independent countries located?",
                 answer_1 = "Asia",
@@ -170,11 +115,8 @@ class MainActivity : BaseActivity() {
                 score = 5,
                 picPath = R.drawable.q_9,
                 clickedAnswer = null
-            )
-        )
-
-        question.add(
-            QuestionModel(
+            ),
+            QuestionDataModel(
                 id = 10,
                 question = "Which ocean has the greatest average depth?",
                 answer_1 = "Pacific Ocean",
@@ -187,8 +129,5 @@ class MainActivity : BaseActivity() {
                 clickedAnswer = null
             )
         )
-
-        return question
     }
-
 }

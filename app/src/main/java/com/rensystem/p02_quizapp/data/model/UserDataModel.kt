@@ -1,6 +1,6 @@
-package com.rensystem.p02_quizapp.Domain
+package com.rensystem.p02_quizapp.data.model
 
-data class UserModel(
+data class UserDataModel (
     val id:Int,
     val name:String,
 //    val pic:String,

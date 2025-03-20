@@ -1,17 +1,12 @@
-package com.rensystem.p02_quizapp.Adapter.question
+package com.rensystem.p02_quizapp.ui.question.questionAdapter
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.rensystem.p02_quizapp.Domain.QuestionModel
-import com.rensystem.p02_quizapp.R
 import com.rensystem.p02_quizapp.databinding.ItemViewholderQuestionBinding
-import kotlin.reflect.typeOf
 
 
 class QuestionAdapter(

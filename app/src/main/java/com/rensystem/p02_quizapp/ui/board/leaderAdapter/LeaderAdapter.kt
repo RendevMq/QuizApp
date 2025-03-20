@@ -1,11 +1,11 @@
-package com.rensystem.p02_quizapp.Adapter.leader
+package com.rensystem.p02_quizapp.ui.board.leaderAdapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.rensystem.p02_quizapp.Domain.UserModel
+import com.rensystem.p02_quizapp.domain.model.UserModel
 import com.rensystem.p02_quizapp.databinding.ItemViewholderLeaderBinding
 
 class LeaderAdapter: RecyclerView.Adapter<LeaderViewHolder>(){
